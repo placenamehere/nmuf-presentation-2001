@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<title>~cac6982</title>
+<style type="text/css">
+<!--
+#type { postition:absolute; left:0; top:0; z-index:0; }
+div.thumbnail { position:absolute; left:0px; top:0px; width:31px; height:33px; visibility:hidden; }
+div.photo { position:absolute; left:0px; top:0px; border:2px rgb(173,181,184) solid;  }
+a { outline:none; }
+
+#escalatorThumb { z-index:2; }
+#pathThumb { z-index:3; }
+#plateThumb { z-index:4; }
+#rainbowThumb { z-index:5; }
+#tireThumb { z-index:6; }
+#benchThumb { z-index:7; }
+#houseThumb { z-index:8; }
+
+#windowOutline { position:absolute; left:0; top:0; visibility:hidden; border:2px #666666 dotted; z-index:1; } 
+-->
+</style>
+<script type="text/javascript">
+<!-- //
+function handleError() {
+	window.document.location.href = 'javascript_error.html';
+}
+
+window.onerror = handleError;
+//-->
+</script>
+<script type="text/javascript" src="../pnhObjectLibrary/pnhWindowObject.js"></script>
+<script type="text/javascript" src="../pnhObjectLibrary/pnhLayerObject.js"></script>
+<script type="text/javascript" src="../pnhObjectLibrary/pnhScalableImageObject.js"></script>
+<script type="text/javascript">
+<!-- //
+
+// [from left, from bottom]
+var thumbOffsets = new Array();
+thumbOffsets["escalator"] = [30,77];
+//thumbOffsets["path"] = [81,90];
+thumbOffsets["plate"] = [90,60];
+//thumbOffsets["rainbow"] = [105,119];
+thumbOffsets["bench"] = [60,128];
+thumbOffsets["house"] = [19,148];
+thumbOffsets["tire"] = [105,119];
+
+var imageSizes = new Array();
+imageSizes["escalator"] = [845,567];
+//imageSizes["path"] = [400,400];
+imageSizes["plate"] = [822,549];
+//imageSizes["rainbow"] = [847,555];
+imageSizes["bench"] = [563,852];
+imageSizes["house"] = [842,561];
+imageSizes["tire"] = [867,580];
+
+var minWinWidth = 530;
+var winWidth = minWinWidth;
+var minWinHeight = 350;
+var winHeight = minWinHeight;
+
+var leftPhotoMargin = 225;
+var photoPadding = 30;
+// var bullshitImageSize = [600,400];
+
+var currentPhoto = null;
+
+var outlineSteps = 10;
+
+
+
+function handleThumbClick(sName) {
+
+	currentPhoto = sName;
+	// Step 0: Determine the restrictive
+	var canvasWidth = winWidth - (photoPadding*2 + leftPhotoMargin);
+	var canvasHeight = winHeight - photoPadding*2;
+	
+	var imageAspect = imageSizes[sName][0]/imageSizes[sName][1];
+	var canvasAspect = canvasWidth/canvasHeight;
+	
+	// Step 1: Determine size of full image
+	if (canvasAspect < imageAspect) {	// width is restrictive
+		var imageWidth = canvasWidth;
+		var imageHeight = imageWidth * imageSizes[sName][1]/imageSizes[sName][0];
+	} else { // height is restrictive 
+		var imageHeight = canvasHeight;
+		var imageWidth = imageHeight * imageSizes[sName][0]/imageSizes[sName][1];
+	}
+	
+	// Step 2: Determine position of full image
+	// left position is centered in a box canvasWidth wide + 200px
+	// top position is centered in a box canvasHeight tall
+	
+	var imageLeft = (canvasWidth-imageWidth)/2 + 200;
+	var imageTop = (winHeight-imageHeight)/2;
+	
+	
+	
+	
+	photoLayers[currentPhoto].setX(imageLeft);
+	photoLayers[currentPhoto].setY(imageTop);
+	photoLayers[currentPhoto].setWidth(imageWidth);
+	photoLayers[currentPhoto].setHeight(imageHeight);
+	
+}
+
+function redefineCanvas() {
+	var newWinW = new pnhWindowObject().getInnerWidth();
+	if (newWinW > minWinWidth) { winWidth = newWinW; } else { winWidth = minWinWidth; }
+	var newWinH = new pnhWindowObject().getInnerHeight();
+	if (newWinH > minWinHeight) { winHeight = newWinH; } else { winHeight = minWinHeight; }
+}
+
+
+
+
+function startShit() {
+	
+	photoLayers = new Array(1);
+	photoLayers["tire"] = new pnhScalableImageObject("tireImage","tirePhoto");
+	redefineCanvas();
+	handleThumbClick("tire");
+}
+// -->
+</script>
+</head>
+
+<body style="background-color:rgb(194,203,207); margin:0; padding:0;" onload="startShit()" onresize="startShit()">
+
+<div id="tireImage" class="photo"><img name="tirePhoto" src="images/tire.jpg" width="60" height="40" alt="" border="0"></div>
+
+</body>
+</html>

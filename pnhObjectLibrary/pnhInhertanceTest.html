@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<title>Untitled</title>
+<script type="text/javascript">	
+function showSomething() {
+	alert(this.something);
+}
+function baseObject(sSomething) {
+	this.something = sSomething;
+}
+baseObject.prototype.showSomething = showSomething;
+function subObject(sSomething,iSSN) {
+	this.superClass(sSomething);
+	this.ssn = iSSN;
+}
+subObject.prototype = new baseObject;
+subObject.prototype.superClass = baseObject.prototype.constructor;
+
+/*
+function xShowSomething() {
+	alert(this.something);
+}
+
+function baseObject(sSomething) {
+	this.something = sSomething;
+	this.showSomething = xShowSomething;
+}
+
+function subObject(sSomething,iSSN) {
+	this.something = sSomething;
+	this.ssn = iSSN;
+}
+
+subObject.prototype = new baseObject;
+*/
+
+var testObject = new subObject("my object",453);
+testObject.showSomething();
+</script>
+</head>
+
+<body>
+
+
+
+</body>
+</html>

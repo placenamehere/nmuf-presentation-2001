@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<title>~cac6982</title>
+<style type="text/css">
+<!--
+#type { postition:absolute; left:0; top:0; z-index:0; }
+div.thumbnail { position:absolute; left:0px; top:0px; width:31px; height:33px; visibility:hidden; }
+div.photo { position:absolute; left:0px; top:0px; border:2px rgb(173,181,184) solid; visibility:hidden; }
+a { outline:none; }
+
+#escalatorThumb { z-index:2; }
+#pathThumb { z-index:3; }
+#plateThumb { z-index:4; }
+#rainbowThumb { z-index:5; }
+#tireThumb { z-index:6; }
+#benchThumb { z-index:7; }
+#houseThumb { z-index:8; }
+
+#windowOutline { position:absolute; left:0; top:0; visibility:hidden; border:2px #666666 dotted; z-index:1; } 
+-->
+</style>
+<script type="text/javascript">
+<!-- //
+function handleError() {
+	window.document.location.href = 'javascript_error.html';
+}
+
+window.onerror = handleError;
+//-->
+</script>
+<script type="text/javascript" src="../pnhObjectLibrary/pnhWindowObject.js"></script>
+<script type="text/javascript" src="../pnhObjectLibrary/pnhLayerObject.js"></script>
+<script type="text/javascript" src="../pnhObjectLibrary/pnhScalableImageObject.js"></script>
+<script type="text/javascript">
+<!-- //
+
+// [from left, from bottom]
+var thumbOffsets = new Array();
+thumbOffsets["escalator"] = [30,77];
+//thumbOffsets["path"] = [81,90];
+thumbOffsets["plate"] = [90,60];
+//thumbOffsets["rainbow"] = [105,119];
+thumbOffsets["bench"] = [60,128];
+thumbOffsets["house"] = [19,148];
+thumbOffsets["tire"] = [105,119];
+
+var imageSizes = new Array();
+imageSizes["escalator"] = [845,567];
+//imageSizes["path"] = [400,400];
+imageSizes["plate"] = [822,549];
+//imageSizes["rainbow"] = [847,555];
+imageSizes["bench"] = [563,852];
+imageSizes["house"] = [842,561];
+imageSizes["tire"] = [867,580];
+
+var minWinWidth = 530;
+var winWidth = minWinWidth;
+var minWinHeight = 350;
+var winHeight = minWinHeight;
+
+var leftPhotoMargin = 225;
+var photoPadding = 30;
+// var bullshitImageSize = [600,400];
+
+var currentPhoto = null;
+
+var outlineSteps = 10;
+
+function redrawOutline(iDeltaLeft, iDeltaTop, iDeltaWidth, iDeltaHeight, sPhotoName, stepNum) {
+	if (stepNum < outlineSteps) {
+		outline.moveBy(iDeltaLeft,iDeltaTop);
+		outline.changeSizeBy(iDeltaWidth,iDeltaHeight);
+		setTimeout("redrawOutline(" + iDeltaLeft + "," + iDeltaTop + "," + iDeltaWidth + "," + iDeltaHeight + ",'" + sPhotoName + "'," + (stepNum+1) + ")", 10);
+	} else {
+		// show photo
+			photoLayers[sPhotoName].setX(outline.getX());
+			photoLayers[sPhotoName].setY(outline.getY());
+			photoLayers[sPhotoName].setWidth(outline.getWidth());
+			photoLayers[sPhotoName].setHeight(outline.getHeight());
+			//outline.setVisibility("hidden");
+			photoLayers[sPhotoName].setVisibility("visible");
+	}
+
+}
+
+function handleThumbClick(sName) {
+	if (currentPhoto) {
+		photoLayers[currentPhoto].setVisibility("hidden");
+		photoLayers[currentPhoto].setX(0);
+		photoLayers[currentPhoto].setY(0);
+		photoLayers[currentPhoto].setWidth(10);
+		photoLayers[currentPhoto].setHeight(10);
+	}
+	currentPhoto = sName;
+	// Step 0: Determine the restrictive
+	var canvasWidth = winWidth - (photoPadding*2 + leftPhotoMargin);
+	var canvasHeight = winHeight - photoPadding*2;
+	
+	var imageAspect = imageSizes[sName][0]/imageSizes[sName][1];
+	var canvasAspect = canvasWidth/canvasHeight;
+	
+	// Step 1: Determine size of full image
+	if (canvasAspect < imageAspect) {	// width is restrictive
+		var imageWidth = canvasWidth;
+		var imageHeight = imageWidth * imageSizes[sName][1]/imageSizes[sName][0];
+	} else { // height is restrictive 
+		var imageHeight = canvasHeight;
+		var imageWidth = imageHeight * imageSizes[sName][0]/imageSizes[sName][1];
+	}
+	
+	// Step 2: Determine position of full image
+	// left position is centered in a box canvasWidth wide + 200px
+	// top position is centered in a box canvasHeight tall
+	
+	var imageLeft = (canvasWidth-imageWidth)/2 + 200;
+	var imageTop = (winHeight-imageHeight)/2;
+	
+	// Step 3: Start the outline at the clicked thumbnail
+	
+	
+	outline.setX(thumbLayers[sName].getX());
+	outline.setY(thumbLayers[sName].getY());
+	outline.setWidth(5);
+	outline.setHeight(5);
+	outline.setVisibility("visible");
+	
+	// step 4: Grow the outline & move it
+	// step 5: Show the image
+	redrawOutline(((imageLeft-thumbLayers[sName].getX())/outlineSteps),((imageTop-thumbLayers[sName].getY())/outlineSteps),((imageWidth-5)/outlineSteps),((imageHeight-5)/outlineSteps),sName,0);
+
+}
+
+function redefineCanvas() {
+	var newWinW = new pnhWindowObject().getInnerWidth();
+	if (newWinW > minWinWidth) { winWidth = newWinW; } else { winWidth = minWinWidth; }
+	var newWinH = new pnhWindowObject().getInnerHeight();
+	if (newWinH > minWinHeight) { winHeight = newWinH; } else { winHeight = minWinHeight; }
+}
+
+
+function positionThumbs() {
+	redefineCanvas();
+	
+	thumbLayers["escalator"].setX(thumbOffsets["escalator"][0]);
+	thumbLayers["escalator"].setY(winHeight-thumbOffsets["escalator"][1]);
+	
+	//thumbLayers["path"].setX(thumbOffsets["path"][0]);
+	//thumbLayers["path"].setY(winHeight-thumbOffsets["path"][1]);
+
+	thumbLayers["plate"].setX(thumbOffsets["plate"][0]);
+	thumbLayers["plate"].setY(winHeight-thumbOffsets["plate"][1]);
+	
+	thumbLayers["tire"].setX(thumbOffsets["tire"][0]);
+	thumbLayers["tire"].setY(winHeight-thumbOffsets["tire"][1]);
+	
+	thumbLayers["bench"].setX(thumbOffsets["bench"][0]);
+	thumbLayers["bench"].setY(winHeight-thumbOffsets["bench"][1]);	
+
+	thumbLayers["house"].setX(thumbOffsets["house"][0]);
+	thumbLayers["house"].setY(winHeight-thumbOffsets["house"][1]);	
+}
+
+
+function handleResize() {
+	if (currentPhoto) {
+		photoLayers[currentPhoto].setVisibility("hidden");
+		photoLayers[currentPhoto].setX(0);
+		photoLayers[currentPhoto].setY(0);
+		photoLayers[currentPhoto].setWidth(10);
+		photoLayers[currentPhoto].setHeight(10);
+	}
+	currentPhoto = null;
+	outline.setVisibility("hidden");
+	outline.setX(0);
+	outline.setY(0);
+	outline.setWidth(10);
+	outline.setHeight(10);
+		
+	positionThumbs();
+}
+
+function startShit() {
+	thumbLayers = new Array(5);
+	
+	thumbLayers["escalator"] = new pnhLayerObject("escalatorThumb",null);
+	// thumbLayers["path"] = new pnhLayerObject("pathThumb",null);
+	thumbLayers["plate"] = new pnhLayerObject("plateThumb",null);
+	thumbLayers["rainbow"] = new pnhLayerObject("rainbowThumb",null);
+	thumbLayers["tire"] = new pnhLayerObject("tireThumb",null);
+	thumbLayers["bench"] = new pnhLayerObject("benchThumb",null);
+	thumbLayers["house"] = new pnhLayerObject("houseThumb",null);
+
+
+	thumbLayers["escalator"].setVisibility("visible");
+	thumbLayers["plate"].setVisibility("visible");
+	thumbLayers["tire"].setVisibility("visible");
+	thumbLayers["bench"].setVisibility("visible");
+	thumbLayers["house"].setVisibility("visible");
+	
+	outline = new pnhScalableImageObject("windowOutline","outlineImage");
+	
+	photoLayers = new Array(5);
+	photoLayers["escalator"] = new pnhScalableImageObject("escalatorImage","escalatorPhoto");
+	photoLayers["plate"] = new pnhScalableImageObject("plateImage","platePhoto");
+	photoLayers["tire"] = new pnhScalableImageObject("tireImage","tirePhoto");
+	photoLayers["bench"] = new pnhScalableImageObject("benchImage","benchPhoto");
+	photoLayers["house"] = new pnhScalableImageObject("houseImage","housePhoto");
+	
+	positionThumbs();
+}
+// -->
+</script>
+</head>
+
+<body style="background-color:rgb(194,203,207); margin:0; padding:0;" onload="startShit()" onresize="handleResize()">
+<div id="type"><p style="font-family:'Arial Black'; font-size:130px; line-height:95px; color:rgb(173,181,184); word-spacing:-50px; margin:0; padding:2px;">I L O V E I T W H E N A P L A N C O M E S T O G E T H E R</p><a href="mailto:cac6982@placenamehere.com" style="font-family:'Arial Narrow', Arial; font-size:20px; text-decoration:none; color:rgb(173,181,184); margin:0; padding:2px; line-height:1.2em;">[cac6982@placenamehere.com]</a></div>
+
+
+<div id="escalatorThumb" class="thumbnail"><a href="#" onclick="handleThumbClick('escalator'); return false"><img src="images/escalator_thumb.gif" width="31" height="33" alt="" border="0"></a></div>
+<div id="plateThumb" class="thumbnail"><a href="#" onclick="handleThumbClick('plate'); return false"><img src="images/plate_thumb.gif" width="31" height="33" alt="" border="0"></a></div>
+<div id="tireThumb" class="thumbnail"><a href="#" onclick="handleThumbClick('tire'); return false"><img src="images/tire_thumb.gif" width="31" height="33" alt="" border="0"></a></div>
+<div id="benchThumb" class="thumbnail"><a href="#" onclick="handleThumbClick('bench'); return false"><img src="images/bench_thumb.gif" width="31" height="33" alt="" border="0"></a></div>
+<div id="houseThumb" class="thumbnail"><a href="#" onclick="handleThumbClick('house'); return false"><img src="images/house_thumb.gif" width="31" height="33" alt="" border="0"></a></div>
+
+<div id="windowOutline"><img name="outlineImage" src="images/spacer.gif" width="5" height="5" alt="" border="0"></div>
+
+<div id="escalatorImage" class="photo"><img name="escalatorPhoto" src="images/escalator.jpg" width="60" height="40" alt="" border="0"></div>
+<div id="plateImage" class="photo"><img name="platePhoto" src="images/plate.jpg" width="60" height="40" alt="" border="0"></div>
+<div id="benchImage" class="photo"><img name="benchPhoto" src="images/bench.jpg" width="60" height="40" alt="" border="0"></div>
+<div id="houseImage" class="photo"><img name="housePhoto" src="images/house.jpg" width="60" height="40" alt="" border="0"></div>
+<div id="tireImage" class="photo"><img name="tirePhoto" src="images/tire.jpg" width="60" height="40" alt="" border="0"></div>
+
+</body>
+</html>

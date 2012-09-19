@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<title>Christopher Casciano Photography</title>
+<meta name="description" content="Chris Casciano Photography, part of my digital playgound. Contained within is a quite dynamic presentation of photographs that I have taken over the course of the past five years.">
+<meta name="keywords" content="Chris Casciano, Christopher Casciano, 10sball, personal web site, photography, portfolio, DHTML, Dynamic HTML, JavaScript, CSS, Style Sheets, Browser, Photos, Web Design, Web Development, Developer, Photography, Amateur Photography, Experimentation, Experiments, Place Name Here, Digital Playground"> 
+<meta name="PropsTo" content="Big props to all who have help me put this site together via their great comments and critiques">
+<meta name="author" content="Chris Casciano">
+<style type="text/css">
+<!--
+#sample { position:absolute; top:0; left:0; width:429px; height:175px; visibility:hidden; z-index:3; }
+#copy { position:absolute; top:160; left:0; width:315px; height:200px; z-index:6; text-align:right; }
+a { font-family:Verdana; color:#FFE7CF; font-size:18px; font-weight:bold; text-decoration:none; }
+
+.myname {font-family:Verdana; color:#000000; font-size:16px; font-weight:bold;}
+.mytitle {font-family:Verdana; color:#000000; font-size:12px; font-weight:bold;}
+
+-->
+</style>
+<script language="JavaScript">
+<!-- //
+function setSample() {
+        var winW = (document.all) ? (document.body.offsetWidth - 20) : window.innerWidth;
+        var winH = (document.all) ? (document.body.offsetHeight - 4) : window.innerHeight;
+		var dhtmlable = false;
+		
+		if (document.all) {
+                dhtmlable = true;
+                sampleStyle = document.all.sample.style;
+        } else if (document.getElementById) {
+				dhtmlable = true;
+				sampleStyle = document.getElementById("sample");
+        } else if (document.layers) {
+                dhtmlable = true;
+                sampleStyle = document.layers["sample"];
+        }
+        
+		if (dhtmlable) {
+			sampleStyle.top =  (winH > 175) ? (winH - 175) : 0;
+			sampleStyle.left = (winW > 429) ? (winW - 429) : 0;
+			sampleStyle.visibility = "visible";
+		}
+}
+
+
+// 576x260
+function makePopup() {
+	if (navigator.appVersion.charAt(0) >= 4) {
+		var mywindow = window.open('popup.html','photos','width=576,height=280,status=no,menubar=no,scrollable=no,resizable=yes');
+		mywindow.focus();
+	} else { alert("Due to the intense nature of this site it only runs on a version 4 or higher browser"); }
+}
+// -->
+</script>
+</head>
+
+<body bgcolor="#FFB366" text="#000000" alink="#FFFFFF" background="opener/bkg.gif" onLoad="setSample(); makePopup()">
+<div id="copy"><span class="myname">Christopher Casciano </span><span class="mytitle">PHOTOGRAPHY</span><br><br><br><a href="#" onClick="makePopup(); return false">{reopen window}</a><br><a href="../index.shtml">{back to pnh/chris}</a></div>
+<div id="sample"><img src="opener/flower.gif" width=429 height=175 alt="sample flower" border="0"></div>
+</body>
+</html>

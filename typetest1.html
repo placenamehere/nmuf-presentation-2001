@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<title>Untitled</title>
+<script type="text/javascript" src="../pnhObjectLibrary/pnhWindowObject.js"></script>
+<script type="text/javascript">
+var isLoaded = false;
+var charsPerLine = 80;
+var headerCharsPerLine = 32;
+
+function sizeText() {
+	var winW = new pnhWindowObject().getInnerWidth();
+	var newTextSize = Math.floor(winW/charsPerLine*2.4);
+	if (newTextSize>22) {newTextSize=22} 
+	if (newTextSize<12) {newTextSize=12} 
+	//alert(newTextSize);
+	// alert("document.getElementsByTagName('p').length: " + document.getElementsByTagName('p').length);
+	var newHeaderSize = Math.floor(winW/headerCharsPerLine*2.4);
+	for (i=0;i<document.getElementsByTagName('p').length;i++) {
+		document.getElementsByTagName('p')[i].style.fontSize = newTextSize + "px";
+		//document.getElementsByTagName('p')[i].style.fontSize = newTextSize;
+	}
+	for (i=0;i<document.getElementsByTagName('h1').length;i++) {
+		document.getElementsByTagName('h1')[i].style.fontSize = newHeaderSize + "px";
+	}
+}
+
+</script>
+</head>
+
+<body onload="sizeText(); isLoaded=true;" onresize="if (isLoaded) {sizeText()}">
+<h1>Politician Turns Pizza Man</h1>
+<p>CANBERRA (Reuters) - Australian Treasurer Peter Costello said Wednesday he had taken time out to deliver pizza advertising leaflets -- to cover for his 14-year-old son.</p>
+<p>Costello, heir apparent to Prime Minister John Howard, confessed to donning a hat and overcoat in a bid to disguise himself while delivering the flyers for his son, who had neglected his after-school delivery job.</p>
+<p>``Like a lot of kids he was out all weekend and he hadn't done his rounds so I thought I'd better do it for him,'' Costello told the Seven Network's Current Affair program.</p>
+<p>``I donned a hat and a big overcoat and went round in the early hours of the morning delivering leaflets for the local pizza joint,'' Costello said.</p>
+<p>The treasurer, who delivered his sixth federal budget on Tuesday, said his son at least appeared to be an entrepreneur.</p>
+<p>``He gets paid A$3 (US$1.55) an hour but I want you to know he didn't share any of it with me... he's obviously a businessman because he had someone working for him for free,'' Costello said.</p>
+</body>
+</html>

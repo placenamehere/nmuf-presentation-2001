@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<title>Timeline nav test 03</title>
+<script type="text/javascript" src="pnhObjectLibrary/pnhLayerObject.js"></script>
+<script type="text/javascript" src="pnhObjectLibrary/pnhWindowObject.js"></script>
+<script type="text/javascript">
+function runCrap() {
+	var mydates = new Array(8);
+	
+	var pageHeight = new pnhWindowObject().getInnerHeight()-30;
+	
+	mydates[0] = new Date("September 9, 1998");
+	mydates[1] = new Date("November 11, 1999");
+	mydates[2] = new Date("December 22, 1999");
+	mydates[3] = new Date("May 5, 2000");
+	mydates[4] = new Date("August 8, 2000");
+	mydates[5] = new Date("October 1, 2000");
+	mydates[6] = new Date("December 22, 2000");
+	mydates[7] = new Date("January 15, 2001");
+	
+	
+	var dateSpan = mydates[mydates.length-1].getTime() - mydates[0].getTime();
+	
+	// alert (dateSpan);
+
+
+	var positions = new Array(8);
+	
+	positions[0] = (mydates[0].getTime() - mydates[0].getTime())/dateSpan*pageHeight;
+	positions[1] = (mydates[1].getTime() - mydates[0].getTime())/dateSpan*pageHeight;
+	positions[2] = (mydates[2].getTime() - mydates[0].getTime())/dateSpan*pageHeight;
+	positions[3] = (mydates[3].getTime() - mydates[0].getTime())/dateSpan*pageHeight;
+	positions[4] = (mydates[4].getTime() - mydates[0].getTime())/dateSpan*pageHeight;
+	positions[5] = (mydates[5].getTime() - mydates[0].getTime())/dateSpan*pageHeight;
+	positions[6] = (mydates[6].getTime() - mydates[0].getTime())/dateSpan*pageHeight;
+	positions[7] = (mydates[7].getTime() - mydates[0].getTime())/dateSpan*pageHeight;
+
+	
+	new pnhLayerObject("element0",null).setY(pageHeight-positions[0]);
+	new pnhLayerObject("element1",null).setY(pageHeight-positions[1]);
+	new pnhLayerObject("element2",null).setY(pageHeight-positions[2]);
+	new pnhLayerObject("element3",null).setY(pageHeight-positions[3]);
+	new pnhLayerObject("element4",null).setY(pageHeight-positions[4]);
+	new pnhLayerObject("element5",null).setY(pageHeight-positions[5]);
+	new pnhLayerObject("element6",null).setY(pageHeight-positions[6]);
+	new pnhLayerObject("element7",null).setY(pageHeight-positions[7]);
+	
+
+
+
+}
+</script>
+
+<style type="text/css">
+
+body { background-color:#FFFFFF; padding:0; margin:0; }
+div { position:absolute; left:125; top:0px; border:1px #000000 solid; }
+
+</style>
+</head>
+
+<body onload="runCrap()">
+<div id="element0">September 9, 1998</div>
+<div id="element1">November 11, 1999</div>
+<div id="element2">December 22, 1999</div>
+<div id="element3">May 5, 2000</div>
+<div id="element4">August 8, 2000</div>
+<div id="element5">October 1, 2000</div>
+<div id="element6">December 22, 2000</div>
+<div id="element7">January 15, 2001</div>
+
+</body>
+</html>

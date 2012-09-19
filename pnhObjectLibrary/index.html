@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+<head>
+<title>place name here | pnhObjectLibrary</title>
+<link rel="stylesheet" type="text/css" media="screen" title="pnh_chEEse" href="../allstyles.css">
+<style type="text/css"> 
+ <!--
+ p {  font-size: 13px; margin-top: 2px; margin-left: 3px; margin-bottom: 2px; margin-right: 2px}
+ p.methdesc {  font-size: 13px; margin-top: 1px; margin-left: 20px; margin-bottom: 0px; margin-right: 2px}
+ p.objdesc {  font-size: 13px; margin-top: 1px; margin-left: 5px; margin-bottom: 5px; margin-right: 2px}
+ a {  font-size: 13px; color: #9FD188; background-color: #FFFFFF; font-weight:bold; }
+ h1 {  font-size: 45px; margin-top: 2px; margin-left: 0px; margin-bottom: 2px; margin-right: 0px}
+ h1.overlay {  font-size: 45px; color: #101911; background-color: #FFFFFF; }
+ h2 {  font-size: 20px; font-weight:bold; margin-top: 8px; margin-left: 0px; margin-bottom: 2px; margin-right: 0px}
+ h3 {  font-size: 17px; margin-top: 12px; margin-left: 0px; margin-bottom: 2px; margin-right: 0px}
+ h4 {  font-size: 13px; font-weight:bold; margin-top: 8px; margin-left: 0px; margin-bottom: 2px; margin-right: 0px}
+ h5 {  font-size: 13px; font-weight:bold; color: #9FD188; background-color: #FFFFFF; margin-top: 5px; margin-left: 5px; margin-bottom: 1px; margin-right: 0px}
+ li {  font-size: 13px; margin-top: 1px; margin-left: 25px; margin-bottom: 0px; margin-right: 2px; }
+ ul,ol {  margin-top: 2px; margin-bottom: 2px; }
+ span.links { margin-left:4em;}
+ -->
+ </style>
+</head>
+
+<body style="margin:0; padding:0;">
+<iframe src="/showNames.shtml" title="namesplacedhere" style="border-bottom:3px #BCBCE7 solid" width="100%" height="15%" marginwidth="0" marginheight="0" scrolling="no" frameborder="0">[<a href="/showNames.shtml" title="see names left by some past visitors of place name here" style="text-align:center">names placed here</a>]</iframe><br>
+
+<div>
+	<h2>what is pnhObjectLibrary?</h2>
+	<p>I started this library of code for 3 reasons: (1) I never want to think a bout browser specific coding again; (2) Formal javascript APIs that I have seen distributed on the web don't fit my object oriented coding style at all; (3) I found myself rewriting and awful lot of code that i had already written for other things simple because i was too lazy to find it. So I took a serious look through my old code and tried to figure out the types of things I have done in the past and did a lot of cutting and pasting to put these together. The fuctionality of these objects is not complete by any means, it covers only functionality that I have needed in my work.</p>
+	<p>Please note, I am not offering these up as a formal API for distribution. Look at them, learn from them, and perhaps use them. I am not supporting these objects in any way, shape or form. These objects were put together for purely selfish reasons. And any further work on them will be driven by similarly selfish reasons.</p>
+	<p>[documentation last updated 2001/03/17]</p>
+</div>
+
+<div>
+	<h2>object descriptions</h2>
+	<ul>
+		<li>
+			pnhExtendedImageObject <span class="links">[<a href="pnhExtendedImageObject.js" title="pnhExtendedImageObject.js - choose Save Link to view">source</a>]</span>
+			<p class="objdesc">Used to define a graphic for later use in a document. This object has nothing to do with the DOM or changing an image in a document. It simply provides a more robust Image object. It allows for a separation of the definition of the graphic file's URI from the loading of the graphic.</p>
+		</li>
+		<li>
+			pnhLayerObject <span class="links">[<a href="pnhLayerObject.js" title="pnhLayerObject.js - choose Save Link to view">source</a>] [<a href="pnhLayerObject.html" name="test case for pnhLayerObject">test case</a>]</span>
+			<p class="objdesc">Used to give cross-platform, cross-browser access to a specified layer. A layer is defined as any html DIV tag that was originally defined a position via CSS.</p>
+		</li>
+		<li>
+			pnhScalableImageObject <span class="links">[<a href="pnhScalableImageObject.js" title="pnhScalableImageObject.js - choose Save Link to view">source</a>] [<a href="pnhScalableImageObject.html" name="test case for pnhScalableImageObject">test case</a>]</span>
+			<p class="objdesc">Extends pnhLayerObject to create an image that is both scalable and moveable</p>
+			<p class="objdesc">Requires pnhLayerObject linked also; Not compatible with NN4; NN6/Mozilla shows some serious cashing issues</p>
+		</li>
+		<li>
+			pnhWindowObject <span class="links">[<a href="pnhWindowObject.js" title="pnhWindowObject.js - choose Save Link to view">source</a>] [<a href="pnhWindowObject.html" name="test case for pnhWindowObject">test case</a>]</span>
+			<p class="objdesc">This object is used to provide cross-browser &amp; cross-platform access to the current browser window for use in determining browser size and converting percentage distances to pixels.</p>
+		</li>
+
+		<li>
+			pnhDraggableLayerObject <span class="links">[coming sometime]</span>
+			<p class="objdesc">This will extend the standard layer object so it is draggable. I get to finishing and testing this next time I do something with dragging layers in it.</p>
+		</li>
+		
+		
+		
+	</ul>
+</div>
+
+<div>
+	<h2>api documentation</h2>
+	<hr size="1" noshade width="100%" align="left">
+	<ul>
+		<li><a href="#ExtendedImage">pnhExtendedImageObject.js</a></li>
+		<li><a href="#Layer">pnhLayerObject.js</a></li>
+		<li><a href="#ScalableImage">pnhScalableImageObject.js</a></li>
+		<li><a href="#Window">pnhWindowObject.js</a></li>
+	</ul>
+	<hr size="1" noshade width="100%" align="left">
+	<a name="ExtendedImage"></a>
+	<h3>pnhExtendedImageObject.js</h3>
+	<p class="objdesc">Used to define a graphic for later use in a document. This object has nothing to do with the DOM or changing an image in a document. It simply provides a more robust Image object. It allows for a separation of the definition of the graphic file's URI from the loading of the graphic.</p>
+
+	<h4>Constructor:</h4>
+	<h5>pnhExtendedImageObject(string URI)</h5>
+	<p class="methdesc">Creates the object and sets the URI of the image. Loading of the image IS NOT part of the constructor.</p>
+	<ul>
+		<li>URI : string : the location of the graphic file.</li>
+	</ul>
+	<h4>Methods:</h4>
+	<h5>getSrc() :: returns binary source</h5>
+	<p class="methdesc">Used to access the source of the loaded graphic file</p>
+	<h5>load() :: returns true</h5>
+	<p class="methdesc">Initiates the loading of the graphic file</p>
+	<h5>unload() :: returns true</h5>
+	<p class="methdesc">Sets the source of the graphic object to null to free up resources. While this should clear help in theory, I have not tested the actual behavior of individual browsers when using this method to manage resouces.</p>
+
+	<hr size="1" noshade width="100%" align="left">
+
+
+
+
+	<a name="Layer"></a>
+	<h3>pnhLayerObject.js</h3>
+	<p class="objdesc">Used to give cross-platform, cross-browser access to a specified layer. A layer is defined as any html DIV tag that was originally defined a position via CSS.</p>
+	<h4>Constructor:</h4>
+
+	<h5>pnhLayerObject(string layer_id, array nested_layers)</h5>
+	<p class="methdesc"></p>
+	<ul>
+		<li>layer_id : string : the CSS id of the DIV.</li>
+		<li>nested_layers : array : array of layer ids that this layer is found in. Usually null.</li>
+	</ul>
+
+	<h4>Methods:</h4>
+	<h5>changeClipBy(int delta_top, int delta_right, int delta_bottom, int delta_left) :: returns true</h5>
+	<p class="methdesc">Changes the size of the layer's clipping rectangle.</p>
+	<ul>
+		<li>delta_top : integer : the change in the location of the top of the clipping rectangle.</li>
+		<li>delta_right : integer : the change in the location of the right of the clipping rectangle.</li>
+		<li>delta_bottom : integer : the change in the location of the bottom of the clipping rectangle.</li>
+		<li>delta_left : integer : the change in the location of the left of the clipping rectangle.</li>
+	</ul>
+	<h5>getX() :: returns int</h5>
+	<p class="methdesc">Returns the current X position (left) in pixels of the layer</p>
+	<h5>getY() :: returns int</h5>
+	<p class="methdesc">Returns the current Y position (left) in pixels of the layer</p>
+	<h5>moveBy(int delta_left, int delta_top) :: returns true</h5>
+	<p class="methdesc">Changes the position of the layer in relation to it's current postion.</p>
+	<ul>
+		<li>delta_left : integer : the change in the horizontal (left) position of the layer. Positive = Right.</li>
+		<li>delta_top : integer : the change in the vertical (top) position of the layer. Positive = Down.</li>
+	</ul>
+	<h5>setClip(int top, int right, int bottom, int left) :: returns true</h5>
+	<p class="methdesc">Sets the size of the layer's clipping rectangle.</p>
+	<ul>
+		<li>top : integer : the location of the top of the clipping rectangle.</li>
+		<li>right : integer : the location of the right of the clipping rectangle.</li>
+		<li>bottom : integer : the location of the bottom of the clipping rectangle.</li>
+		<li>left : integer : the location of the left of the clipping rectangle.</li>
+	</ul>
+	<h5>setHTML(string html_content, int content_width) :: returns true</h5>
+	<p class="methdesc">Sets the content of the layer to a new chunk of html markup.</p>
+	<ul>
+		<li>html_content : string : The marked up content.</li>
+		<li>content_width : integer : The width of the new content. Used to work around a NN4 inconsistancy.</li>
+	</ul>
+	<h5>setVisibility(string visibility_unit) :: returns true</h5>
+	<p class="methdesc">Sets visibility of the layer.</p>
+	<ul>
+		<li>visibility_unit : string : The new visibility of the layer. Can be set to either "visible" or "hidden".</li>
+	</ul>
+	<h5>setX(int left) :: returns true</h5>
+	<p class="methdesc">Sets X position (left) of the layer. Positive = Right.</p>
+	<h5>setY(int top) :: returns true</h5>
+	<p class="methdesc">Sets Y position (top) of the layer. Positive = Down.</p>
+	<h5>setZ(int zindex) :: returns true</h5>
+	<p class="methdesc">Sets z-index of the layer. Higher = Forward.</p>
+	<hr size="1" noshade width="100%" align="left">
+
+
+
+
+
+	<a name="ScalableImage"></a>
+	<h3>pnhScalableImageObject.js</h3>
+	<p class="objdesc">Extends pnhLayerObject to create an image that is both scalable and moveable</p>
+	<p class="objdesc">Requires pnhLayerObject linked also; Not compatible with NN4; NN6/Mozilla shows some serious cashing issues</p>
+
+	<h4>Constructor:</h4>
+	<h5>pnhScalableImageObject(string layer_id, string image_name)</h5>
+	<ul>
+		<li>layer_id : string : the CSS id of the DIV.</li>
+		<li>image_name : string : the name of the image residing in the specified DIV.</li>
+	</ul>
+
+	<h4>Methods:</h4>
+	<p class="methdesc">NOTE: Inherits all methods from pnhLayerObject</p>
+	<h5>changeSizeBy(int delta_width, int delta_height) :: returns true</h5>
+	<p class="methdesc">Changes the size of the image by the specified dimensions</p>
+	<ul>
+		<li>delta_width : integer : the change to the width of the image.</li>
+		<li>delta_height : integer : the change to the height of the image.</li>
+	</ul>
+	<h5>getHeight() :: returns int</h5>
+	<p class="methdesc">Returns the current height of the image.</p>
+	<h5>getWidth() :: returns int</h5>
+	<p class="methdesc">Returns the current width of the image.</p>
+	<h5>scaleBy(int percent_width, int percent_height) :: returns true</h5>
+	<p class="methdesc">Scales the image by a given percentage of it's height and width.</p>
+	<ul>
+		<li>percent_width : integer : the percentage of the current width that the new width will be set to.</li>
+		<li>percent_height : integer : the percentage of the current height that the new height will be set to.</li>
+	</ul>
+	<h5>setHeight(int new_height) :: returns true</h5>
+	<p class="methdesc">Sets the height of the image.</p>
+	<ul>
+		<li>new_height : integer : the new height of the image.</li>
+	</ul>
+	<h5>setSize(int new_width, int new_height) :: returns true</h5>
+	<p class="methdesc">Sets the height and width of the image</p>
+	<ul>
+		<li>new_width : integer : the new width of the image.</li>
+		<li>new_height : integer : the new height of the image.</li>
+	</ul>
+	<h5>setWidth(int new_width) :: returns true</h5>
+	<p class="methdesc">Sets the width of the image.</p>
+	<ul>
+		<li>new_width : integer : the new width of the image.</li>
+	</ul>
+
+
+	<hr size="1" noshade width="100%" align="left">
+	<a name="Window"></a>
+	<h3>pnhWindowObject.js</h3>
+	<p class="objdesc">This object is used to provide cross-browser &amp; cross-platform access to the current browser window for use in determining browser size and converting percentage distances to pixels.</p>
+
+	<h4>Constructor:</h4>
+	<h5>pnhWindowObject()</h5>
+
+	<h4>Methods:</h4>
+	<h5>clearStatus() :: returns true</h5>
+	<p class="methdesc">Clears the status bar message</p>
+	<h5>getInnerHeight() :: returns int</h5>
+	<p class="methdesc">Returns the height (in pixels) of the viewable area of the browser window</p>
+	<h5>getInnerWidth() :: returns int</h5>
+	<p class="methdesc">Returns the width (in pixels) of the viewable area of the browser window</p>
+	<h5>percentToPixels(int percentage) :: returns int</h5>
+	<p class="methdesc">converts a percentage (int from 0-100) to a pixel value</p>
+	<h5>setStatus(string message) :: returns true</h5>
+	<p class="methdesc">Sets a new status bar message</p>
+</div>
+<div id="footer">
+<p>extra navigation for those who can't be bothered to use the back button: <a href="/contents.html" title="you do know what a table of contents is, don't you?">contents</a>. <a href="/" title="reload it. it's different every time">cover</a>. <a href="mailto:chris@placenamehere.com" target="please send chris email, he is very lonely">email chris</a>.</p>
+</div>
+</body>
+</html>

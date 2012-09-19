@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Christopher Casciano Photography</title>
+<style type="text/css">
+<!--
+#nameLayer { visibility:visible; position:absolute; left:39px; top:96px; width:350px; height:19px; z-index:10; }
+#bigBug { visibility:visible; position:absolute; left:309px; top:20px; width:241px; height:275px; z-index:5; }
+#whiteStripe { visibility:visible; position:absolute; left:0px; top:115px; width:600px; height:10px; z-index:7; }
+#navSquares { visibility:visible; position:absolute; left:212px; top:121px; width:215px; height:35px; z-index:9; }
+#lgHeadings { visibility:visible; position:absolute; left:0px; top:60px; width:600px; height:110px; z-index:3; }
+#imagesNav { visibility:hidden; position:absolute; left:20px; top:240px; width:325px; height:35px; z-index:30; }
+#photoLayer { visibility:hidden; position:absolute; left:20px; top:240px; width:80px; height:80px; z-index:20; }
+#about { visibility:hidden; position:absolute; left:15px; top:30px; width:350px; height:170px; z-index:35; }
+#aboutButton { visibility:hidden; position:absolute; left:4px; top:265px; width:14px; height:8px; z-index:35; }
+.numbers { font-size:35px; color:#FFE7CF; font-weight:bold; font-family:Georgia; font-style:italic; text-decoration:none; }
+a.numbers:hover { color:#FFFFFF; }
+a.credits { color:#000000; text-decoration:none; font-weight:bold; }
+p { font-family:Verdana; color:#000000; font-size:12px; }
+.headings { font-size:200px; color:#FFC284; font-weight:bold; font-family:'Arial Black'; }
+.myname {font-family:Verdana; color:#000000; font-size:16px; font-weight:bold;}
+.mytitle {font-family:Verdana; color:#000000; font-size:12px; font-weight:bold;}
+-->
+</style>
+
+<script language="JavaScript" type="text/javascript" src="../pnhObjectLibrary/pnhLayerObject.js"></script>
+
+<script language="JavaScript">
+<!-- //
+
+/*
+	There's plenty more to do here....
+	* Make it work in Mozilla
+	* finish scanning photos
+	* do final QA on all Mac browsers
+	* look at quality of some of the larger photos & try and get this thing under 750k
+	* clean up this script so it's in a comprehensible order
+	* and most importantly, find a worth while spot for this on placenamehere
+*/
+var inIntro = true;
+var inSubject = null;
+var numButtons = 5;
+
+var isLayersModel = false;
+var isAllModel = false;
+var isW3Model = false;
+
+/* I really don't know which way I want to go here. I would
+	like to always use getElementById, but I don't want to test
+	every flavor of IE 4 & 5. So if there's a difference I'm just
+	gonna use .all if its there - even if I also could use the
+	finalized spec - in summarry - too lazy to retest */
+
+if (document.layers) { isLayersModel = true; }
+if (document.all) { isAllModel = true; }
+if (document.getElementById) { isW3Model = true; }
+
+if (document.images) {
+	// NOTE: There's no way in hell I'm gonna preload all the actual photos will get preloaded... send them when they're asked for
+	var introOuts = new Array(5);
+
+	introOuts[0] = "graphics/transSquareOff.gif";
+	introOuts[1] = "graphics/transSquareOff.gif";
+	introOuts[2] = "graphics/transSquareOff.gif";
+	introOuts[3] = "graphics/transSquareOff.gif";
+	introOuts[4] = "graphics/transSquareOff.gif";
+	introOuts[5] = "graphics/transSquareOff.gif";
+
+	var initialNavOvers = new Array(10);
+	initialNavOvers[0] = new Image();
+	initialNavOvers[0].src = "graphics/firstSquareOn.gif";
+	initialNavOvers[1] = new Image();
+	initialNavOvers[1].src = "graphics/sndSquareOn.gif";
+	initialNavOvers[2] = new Image();
+	initialNavOvers[2].src = "graphics/thirdSquareOn.gif";
+	initialNavOvers[3] = new Image();
+	initialNavOvers[3].src = "graphics/fourthSquareOn.gif";
+	initialNavOvers[4] = new Image();
+	initialNavOvers[4].src = "graphics/nextSquareOn.gif";
+	initialNavOvers[5] = new Image();
+	initialNavOvers[5].src = "graphics/lastSquareOn.gif";
+}
+
+// This is a new object that stores all the needed info about a photo
+function Photo(aPath, aLeft, aTop, aWidth, aHeight) {
+	this.path = aPath;
+	this.left = aLeft;
+	this.top = aTop;
+	this.width = aWidth;
+	this.height = aHeight;
+}
+
+/* I could probably create more custom obects to do this like store
+	information about eact sction and the like, but for a project
+	of this scale brute force will work just as well */
+function initPhotos() {
+	if (document.images) {
+		allPhotos = new Array(6);
+		skylinePhotos = new Array(10);
+			skylinePhotos[0] = new Photo("photos/Skylines-0.jpg",15,60,340,118);
+			skylinePhotos[1] = new Photo("photos/Skylines-1.jpg",35,40,278,186);
+			skylinePhotos[2] = new Photo("photos/Skylines-2.jpg",90,20,287,192);
+			skylinePhotos[3] = new Photo("photos/Skylines-4.jpg",150,12,147,224);
+			skylinePhotos[4] = new Photo("photos/Skylines-5.jpg",190,35,296,195);
+			skylinePhotos[5] = new Photo("photos/Skylines-6.jpg",280,8,150,223);
+			skylinePhotos[6] = new Photo("photos/Skylines-3.jpg",230,40,277,186);
+		archPhotos = new Array(10);
+			archPhotos[0] = new Photo("photos/Structure-0.jpg",25,8,152,223);
+			archPhotos[1] = new Photo("photos/Structure-1.jpg",50,6,153,224);
+			archPhotos[2] = new Photo("photos/Structure-3.jpg",80,9,149,224);
+			archPhotos[3] = new Photo("photos/Structure-5.jpg",130,20,293,192);
+			archPhotos[4] = new Photo("photos/Structure-4.jpg",180,4,151,222);
+			archPhotos[5] = new Photo("photos/Structure-2.jpg",230,8,150,225);
+			archPhotos[6] = new Photo("photos/Structure-6.jpg",240,35,295,192);
+		treePhotos = new Array(10);
+			treePhotos[0] = new Photo("photos/Trees-0.jpg",30,4,154,229);
+			treePhotos[1] = new Photo("photos/Trees-1.jpg",15,40,272,186);
+			treePhotos[2] = new Photo("photos/Trees-2.jpg",60,20,271,186);
+			treePhotos[3] = new Photo("photos/Trees-3.jpg",135,40,270,172);
+			treePhotos[4] = new Photo("photos/Trees-4.jpg",170,12,148,222);
+			treePhotos[5] = new Photo("photos/testPhoto.gif",150,50,150,100);
+			treePhotos[6] = new Photo("photos/testPhoto.gif",150,50,150,100);
+		animalPhotos = new Array(10);
+			animalPhotos[0] = new Photo("photos/Animal-0.jpg",15,20,298,188);
+			animalPhotos[1] = new Photo("photos/Animal-1.jpg",30,6,295,198);
+			animalPhotos[2] = new Photo("photos/Animal-2.jpg",80,20,298,197);
+			animalPhotos[3] = new Photo("photos/Animal-7.jpg",130,12,151,222);
+			animalPhotos[4] = new Photo("photos/Animal-4.jpg",160,30,288,198);
+			animalPhotos[5] = new Photo("photos/Animal-5.jpg",220,20,303,195);
+			animalPhotos[6] = new Photo("photos/Animal-6.jpg",290,9,146,221);
+		flowerPhotos = new Array(10);
+			flowerPhotos[0] = new Photo("photos/Flowers-0.jpg",15,20,294,194);
+			flowerPhotos[1] = new Photo("photos/Flowers-1.jpg",45,30,293,198);
+			flowerPhotos[2] = new Photo("photos/Flowers-2.jpg",90,20,300,197);
+			flowerPhotos[3] = new Photo("photos/Flowers-3.jpg",115,10,298,195);
+			flowerPhotos[4] = new Photo("photos/Flowers-4.jpg",220,28,301,194);
+			flowerPhotos[5] = new Photo("photos/Flowers-5.jpg",240,20,308,196);
+			flowerPhotos[6] = new Photo("photos/Flowers-6.jpg",180,30,302,194);
+		abstractPhotos = new Array(10);
+			abstractPhotos[0] = new Photo("photos/Abstract-1.jpg",45,4,153,224);
+			abstractPhotos[1] = new Photo("photos/Abstract-0.jpg",70,20,297,193);
+			abstractPhotos[2] = new Photo("photos/Abstract-5.jpg",130,20,291,194);
+			abstractPhotos[3] = new Photo("photos/Abstract-7.jpg",180,8,157,225);
+			abstractPhotos[4] = new Photo("photos/Abstract-3.jpg",185,30,295,196);
+			abstractPhotos[5] = new Photo("photos/Abstract-2.jpg",215,20,288,192);
+			abstractPhotos[6] = new Photo("photos/Abstract-6.jpg",238,30,286,192);
+			
+		// does this work?
+		allPhotos[0] = skylinePhotos;
+		allPhotos[1] = archPhotos;
+		allPhotos[2] = treePhotos;
+		allPhotos[3] = animalPhotos;
+		allPhotos[4] = flowerPhotos;
+		allPhotos[5] = abstractPhotos;
+		// guess so ;)
+	}
+}
+
+function setPhoto(aPhoto) {
+	var content = '<img src="' + aPhoto.path + '" width="' + aPhoto.width + '" height="' + aPhoto.height + '">';
+	// hide layer
+	myPhotoLayer.setVisibility('hidden');
+
+	// write content to layer
+	myPhotoLayer.setHTML(content,aPhoto.width);
+	
+	// reposition layer pulling from the photo object
+	myPhotoLayer.setX(aPhoto.left);
+	myPhotoLayer.setY(aPhoto.top);
+	 
+	// myPhotoLayer.height = aPhoto.height; // needed??
+	// myPhotoLayer.width = aPhoto.width; // needed??
+
+	// show layer
+	myPhotoLayer.setVisibility('visible');
+	
+}
+
+function showCredits() { myPhotoLayer.setVisibility('hidden'); myCreditsLayer.setVisibility('visible'); }
+
+function hideCredits() { myCreditsLayer.setVisibility('hidden'); }
+
+function displayPhoto(which) {
+	hideCredits();
+	setPhoto(allPhotos[inSubject][which]);
+}
+
+function makeObjectWrappers() {
+		myNameLayer = new pnhLayerObject("nameLayer",null);
+		myBugLayer = new pnhLayerObject("bigBug",null);
+		myRuleLayer = new pnhLayerObject("whiteStripe",null);
+		myNavLayer = new pnhLayerObject("navSquares",null);
+		myHeadingsLayer = new pnhLayerObject("lgHeadings",null);
+		myImgNavLayer = new pnhLayerObject("imagesNav",null);
+		myPhotoLayer = new pnhLayerObject("photoLayer",null);
+		myCreditsLayer = new pnhLayerObject("about",null);
+		myAboutButton = new pnhLayerObject("aboutButton",null);
+
+
+		if (isLayersModel) {
+			// wrap images
+				navButtons = new Array(numButtons);
+				navButtons[0] = document.layers["navSquares"].document.images["button00"];
+				navButtons[1] = document.layers["navSquares"].document.images["button01"];
+				navButtons[2] = document.layers["navSquares"].document.images["button02"];
+				navButtons[3] = document.layers["navSquares"].document.images["button03"];
+				navButtons[4] = document.layers["navSquares"].document.images["button04"];
+				navButtons[5] = document.layers["navSquares"].document.images["button05"];
+        } else if ((isAllModel)||(isW3Model)) {
+			// wrap images
+				navButtons = new Array(numButtons);
+				navButtons[0] = document.images["button00"];
+				navButtons[1] = document.images["button01"];
+				navButtons[2] = document.images["button02"];
+				navButtons[3] = document.images["button03"];
+				navButtons[4] = document.images["button04"];
+				navButtons[5] = document.images["button05"];
+        }
+}
+
+function changeHeading(newText) {
+		var content = '<span style="font-size:200px; color:#FFD4A8; font-weight:bold; font-family:\'Arial Black\'">' + newText + '</span>';
+		myHeadingsLayer.setHTML(content,500);
+}
+
+
+function highlightSubject(subject, whichIcon) {
+	navButtons[whichIcon-1].src = initialNavOvers[whichIcon-1].src;
+	if (inIntro) {
+		changeHeading(subject);
+	}
+}
+
+
+function hideSubject(which, whichIcon) {
+	for (i=0; i<navButtons.length; i++) {
+		// 1. if we're on it, don't touch it
+		if (i != inSubject) {
+			// 2. eif we're inIntro ues introOuts
+			if (inIntro) {
+				navButtons[i].src = introOuts[i];
+			} else {
+				// 3. eif we're inside use blank outs
+				navButtons[i].src = "graphics/transSquareOff.gif";
+			}
+		}
+	
+	}
+		
+	if (inIntro) {
+		var temp = "";
+		changeHeading(temp);
+	}
+}
+
+function recursiveChange(remainingChanges) {
+		myNameLayer.setVisibility('hidden');
+		remain = remainingChanges;
+        if (remainingChanges > 0) {
+			myBugLayer.moveBy(3,0);
+			myBugLayer.moveBy(0,3);
+			myRuleLayer.moveBy(0,5);
+			myNavLayer.moveBy(6,0);
+			myNavLayer.moveBy(0,5);
+	        remain--;
+	        setTimeout("recursiveChange(remain)",30);
+		} else {
+			myImgNavLayer.setVisibility('visible');
+			myAboutButton.setVisibility('visible');
+		}
+}
+
+function gotoSubject(subject, which) {
+		inSubject = which;
+		myPhotoLayer.setVisibility('hidden');
+//		myAboutButton.visibility = "visible"; // really only have to do this once
+		for (i=0; i<6; i++) {
+			if (i != which){
+				// window.document.layers["navSquares"].document.images[i].src = initialNavOvers[i].src;		
+				navButtons[i].src = "graphics/transSquareOff.gif";
+			}
+		}
+		changeHeading(subject);
+		if (inIntro) {
+			// alert("DBG: initiating intro to content motion");
+			recursiveChange(24);
+			inIntro = false;
+		}
+}
+// -->
+</script>
+</head>
+
+<body bgcolor="#FFB366" alink="#FFFFFF" leftmargin="0" topmargin="0" rightmargin="0" marginwidth="0" marginheight="0" onLoad="initPhotos(); makeObjectWrappers()">
+<div id="nameLayer"><span class="myname">Christopher Casciano </span><span class="mytitle">PHOTOGRAPHY</span></div>
+<div id="bigBug"><img src="graphics/bigbug.gif" width=241 height=275 alt="" border="0"></div>
+<div id="whiteStripe"><img src="graphics/stripe.gif" width=600 height=10 alt="" border=0></div>
+<!-- <div id="navSquares"><a href="#" onMouseOver="highlightSubject('SKYLINES',1)" onMouseOut="hideSubject(0,1)" onClick="gotoSubject('SKYLINES',0); return false"><img name="button00" src="graphics/transSquareOff.gif" width=35 height=33 alt="" border=0></a><a href="#" onMouseOver="highlightSubject('STRUCTURES',2)" onMouseOut="hideSubject(0,2)" onClick="gotoSubject('STRUCTURES',1); return false"><img name="button01" src="graphics/transSquareOff.gif" width=36 height=33 alt="" border=0></a><a href="#" onMouseOver="highlightSubject('TREES',3)" onMouseOut="hideSubject(0,3)" onClick="gotoSubject('TREES',2); return false"><img name="button02" src="graphics/transSquareOff.gif" width=36 height=33 alt="" border=0></a><a href="#" onMouseOver="highlightSubject('ANIMALS',4)" onMouseOut="hideSubject(0,4)" onClick="gotoSubject('ANIMALS',3); return false"><img name="button03" src="graphics/transSquareOff.gif" width=36 height=33 alt="" border=0></a><a href="#" onMouseOver="highlightSubject('FLOWERS',5)" onMouseOut="hideSubject(0,5)" onClick="gotoSubject('FLOWERS',4); return false"><img name="button04" src="graphics/transSquareOff.gif" width=36 height=33 alt="" border=0></a><a href="#" onMouseOver="highlightSubject('ABSTRACTS',6)" onMouseOut="hideSubject(0,6)" onClick="gotoSubject('ABSTRACTS',5); return false"><img name="button05" src="graphics/transSquareOff.gif" width=34 height=33 alt="" border=0></a></div> -->
+<div id="navSquares"><a href="#" onMouseOver="highlightSubject('STRUCTURES',2)" onMouseOut="hideSubject(0,2)" onClick="gotoSubject('STRUCTURES',1); return false"><img name="button01" src="graphics/transSquareOff.gif" width=36 height=33 alt="" border=0></a><a href="#" onMouseOver="highlightSubject('SKYLINES',1)" onMouseOut="hideSubject(0,1)" onClick="gotoSubject('SKYLINES',0); return false"><img name="button00" src="graphics/transSquareOff.gif" width=35 height=33 alt="" border=0></a><a href="#" onMouseOver="highlightSubject('FLOWERS',5)" onMouseOut="hideSubject(0,5)" onClick="gotoSubject('FLOWERS',4); return false"><img name="button04" src="graphics/transSquareOff.gif" width=36 height=33 alt="" border=0></a><a href="#" onMouseOver="highlightSubject('TREES',3)" onMouseOut="hideSubject(0,3)" onClick="gotoSubject('TREES',2); return false"><img name="button02" src="graphics/transSquareOff.gif" width=36 height=33 alt="" border=0></a><a href="#" onMouseOver="highlightSubject('ANIMALS',4)" onMouseOut="hideSubject(0,4)" onClick="gotoSubject('ANIMALS',3); return false"><img name="button03" src="graphics/transSquareOff.gif" width=36 height=33 alt="" border=0></a><a href="#" onMouseOver="highlightSubject('ABSTRACTS',6)" onMouseOut="hideSubject(0,6)" onClick="gotoSubject('ABSTRACTS',5); return false"><img name="button05" src="graphics/transSquareOff.gif" width=34 height=33 alt="" border=0></a></div>
+<div id="lgHeadings"><span class="headings">&nbsp;</span></div>
+<div id="imagesNav"><span class="numbers"><a href="#" class="numbers" onClick="displayPhoto(0); return false">0</a> <a href="#" class="numbers" onClick="displayPhoto(1); return false">1</a> <a href="#" class="numbers" onClick="displayPhoto(2); return false">2</a> <a href="#" class="numbers" onClick="displayPhoto(3); return false">3</a> <a href="#" class="numbers" onClick="displayPhoto(4); return false">4</a> <a href="#" class="numbers" onClick="displayPhoto(5); return false">5</a> <a href="#" class="numbers" onClick="displayPhoto(6); return false">6</a></span></div>
+<div id="photoLayer">&nbsp;</div>
+<div id="about">
+	<span class="myname">Christopher Casciano </span><span class="mytitle">PHOTOGRAPHY</span>
+	<p>All photos copyright Chris Casciano and may not be used without permission.</p>
+	<p>Design and Coding also by Chris Casciano.</p>
+	<p>For more stuff visit <a class="credits" href="http://placenamehere.com" onClick="window.close()" target="_new">http://placenamehere.com</a>.<p>
+	<p><a class="credits" href="#" onClick="hideCredits(); return false">[hide]</a></p>
+</div>
+<div id="aboutButton"><a href="#" onClick="showCredits(); return false"><img src="graphics/aboutButton.gif" width=14 height=8 alt="" border="0"></a></div>
+<br><br>
+</body>
+</html>

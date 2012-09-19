@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<title>Untitled</title>
+<script type="text/javascript" src="../pnhObjectLibrary/pnhLayerObject.js"></script>
+<script type="text/javascript" src="../pnhObjectLibrary/pnhWindowObject.js"></script>
+<script type="text/javascript">
+<!-- //
+
+var step1Num = 0;
+
+//var step2Num = 0;
+//var step3Num = 120;
+//var step4Num = 240;
+
+//var step5Num = 0;
+//var step6Num = 120;
+//var step7Num = 240;
+
+//var step8Num = 0;
+//var step9Num = 120;
+//var step10Num = 240;
+var myDot = null;
+
+function runIt() {
+	step1Num++;
+//	step2Num++;
+//	step3Num++;
+//	step4Num++;
+//	step5Num++;
+//	step6Num++;
+//	step7Num++;
+//	step8Num++;
+//	step9Num++;
+//	step10Num++;
+	if (step1Num >= 360) { step1Num = 0; }
+//	if (step2Num >= 360) { step2Num = 0; }
+//	if (step3Num >= 360) { step3Num = 0; }
+//	if (step4Num >= 360) { step4Num = 0; }
+//	if (step5Num >= 360) { step5Num = 0; }
+//	if (step6Num >= 360) { step6Num = 0; }
+//	if (step7Num >= 360) { step7Num = 0; }
+//	if (step8Num >= 360) { step8Num = 0; }
+//	if (step9Num >= 360) { step9Num = 0; }
+//	if (step10Num >= 360) { step10Num = 0; }
+
+	
+		
+
+	myDot1.setX(Math.sin(step1Num/(2*Math.PI))*(myWindow.getInnerWidth()/3)+(myWindow.getInnerWidth()/2));
+	myDot1.setY(Math.cos(step1Num/(2*Math.PI))*(myWindow.getInnerHeight()/3)+(myWindow.getInnerHeight()/2));
+	
+//	myDot2.setX(2*Math.sin(step2Num/(2*Math.PI))*6+myDot1.getX());
+//	myDot2.setY(2*Math.cos(step2Num/(2*Math.PI))*6+myDot1.getY());
+//	myDot5.setX(2*Math.sin(step5Num/(2*Math.PI))*9+myDot1.getX());
+//	myDot5.setY(2*Math.cos(step5Num/(2*Math.PI))*9+myDot1.getY());
+//	myDot8.setX(2*Math.sin(step8Num/(2*Math.PI))*12+myDot1.getX());
+//	myDot8.setY(2*Math.cos(step8Num/(2*Math.PI))*12+myDot1.getY());
+
+//	myDot3.setX(2*Math.sin(step3Num/(2*Math.PI))*4+myDot1.getX());
+//	myDot3.setY(2*Math.cos(step3Num/(2*Math.PI))*8+myDot1.getY());
+//	myDot6.setX(2*Math.sin(step6Num/(2*Math.PI))*6+myDot1.getX());
+//	myDot6.setY(2*Math.cos(step6Num/(2*Math.PI))*12+myDot1.getY());
+//	myDot9.setX(2*Math.sin(step9Num/(2*Math.PI))*8+myDot1.getX());
+//	myDot9.setY(2*Math.cos(step9Num/(2*Math.PI))*16+myDot1.getY());
+
+//	myDot4.setX(2*Math.sin(step4Num/(2*Math.PI))*8+myDot1.getX());
+//	myDot4.setY(2*Math.cos(step4Num/(2*Math.PI))*6+myDot1.getY());
+//	myDot7.setX(2*Math.sin(step7Num/(2*Math.PI))*12+myDot1.getX());
+//	myDot7.setY(2*Math.cos(step7Num/(2*Math.PI))*6+myDot1.getY());
+//	myDot10.setX(2*Math.sin(step10Num/(2*Math.PI))*16+myDot1.getX());
+//	myDot10.setY(2*Math.cos(step10Num/(2*Math.PI))*8+myDot1.getY());
+	
+	setTimeout("runIt()",150);
+}
+
+function initMe() {
+
+	// instantiate objects
+	myDot1 = new pnhLayerObject("dot1");
+//	myDot2 = new pnhLayerObject("dot2");
+//	myDot3 = new pnhLayerObject("dot3");
+//	myDot4 = new pnhLayerObject("dot4");
+//	myDot5 = new pnhLayerObject("dot5");
+//	myDot6 = new pnhLayerObject("dot6");
+//	myDot7 = new pnhLayerObject("dot7");
+//	myDot8 = new pnhLayerObject("dot8");
+//	myDot9 = new pnhLayerObject("dot9");
+//	myDot10 = new pnhLayerObject("dot10");
+	
+	myWindow = new pnhWindowObject();
+	runIt();
+}
+
+// -->
+</script>
+</head>
+
+<body onload="initMe()" bgcolor="#FFFFFF">
+<div id="oval" style="visibility:hidden;position:absolute; top:103; left:2; width:400; height:200;"><img src="oval.gif" width="400" height="200" alt="" border="0"></div>
+<div id="dot1" style="position:absolute; top:100; left:100; width:10; height:10;"><img src="black.gif" width="10" height="10" alt="" border="0"></div>
+
+<!--
+<div id="dot2" style="position:absolute; top:100; left:100; width:3; height:3;"><img src="red.gif" width="3" height="3" alt="" border="0"></div>
+<div id="dot3" style="position:absolute; top:100; left:100; width:3; height:3;"><img src="gray.gif" width="3" height="3" alt="" border="0"></div>
+<div id="dot4" style="position:absolute; top:100; left:100; width:3; height:3;"><img src="black.gif" width="3" height="3" alt="" border="0"></div>
+
+<div id="dot5" style="position:absolute; top:100; left:100; width:3; height:3;"><img src="red.gif" width="3" height="3" alt="" border="0"></div>
+<div id="dot6" style="position:absolute; top:100; left:100; width:3; height:3;"><img src="gray.gif" width="3" height="3" alt="" border="0"></div>
+<div id="dot7" style="position:absolute; top:100; left:100; width:3; height:3;"><img src="black.gif" width="3" height="3" alt="" border="0"></div>
+
+<div id="dot8" style="position:absolute; top:100; left:100; width:3; height:3;"><img src="red.gif" width="3" height="3" alt="" border="0"></div>
+<div id="dot9" style="position:absolute; top:100; left:100; width:3; height:3;"><img src="gray.gif" width="3" height="3" alt="" border="0"></div>
+<div id="dot10" style="position:absolute; top:100; left:100; width:3; height:3;"><img src="black.gif" width="3" height="3" alt="" border="0"></div>
+-->
+</body>
+</html>

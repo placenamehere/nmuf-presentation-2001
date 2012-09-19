@@ -1,0 +1,89 @@
+never do browser detection again
+
+error handling
+
+research inheritance
+
+should I add toString to the mix  would i ever use it
+
+decide once and for all which is more consistant... checking for document.all or getElementBy Id first
+
+throw some code in there to magically handle nested layers
+
+image preload object vs. image dom object... more naming then anything
+
+other crossbrowser cleanup stuff that should happen outside of my objects... netscape v4.x resize problems, setting onblur for MSIE
+
+-- 
+
+Notes 12/08/2000
+
+pnhBrowserCleanup.js
+======================
+Add Netscape 4.x resize fix
+
+pnhWindowObject.js
+======================
+Seems Clean
+
+pnhLayerObject.js
+=====================
+Need to work on NN6 clipping code
+
+--
+
+API Documentation - 12/08/2000
+
+pnhWindowObject.js
+======================
+
+Constructor:
+
+pnhWindowObject()
+
+Methods:
+
+setStatus(string) :: returns true
+	Sets a new status message
+
+clearStatus() :: returns true
+	Clears the status message
+
+getInnerWidth() :: returns integer
+	Returns the width (in pixels) of the viewable area of the browser window
+
+getInnerHeight() :: returns integer
+	Returns the height (in pixels) of the viewable area of the browser window
+
+percentToPixels(integer) :: returns integer
+	converts a percentage (integer from 0-100) to a pixel value
+
+
+pnhLayerObject.js
+======================
+
+Constructor:
+
+pnhLayerObject(layer id, nested layers)
+	: layer id - string
+	: nested layers - array of layer ids that this id is found in (usually null)
+
+Methods:
+
+getX() :: returns integer
+	Returns the X position (left) in pixels
+
+getY() :: returns integer
+	Returns the Y position (left) in pixels
+
+setX(integer) :: returns true
+
+
+setY(integer) :: returns true
+setZ(integer) :: returns true
+moveBy(integer, integer) :: returns true
+setHTML(string) :: returns true
+setVisibility(string) :: returns true
+setClip(integer, integer, integer, integer) :: returns true
+changeClipBy(integer, integer, integer, integer) :: returns true
+

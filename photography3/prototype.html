@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<title>Christopher Casciano Photography</title>
+<style type="text/css">
+<!--
+#bkgphoto { position:absolute; left:0; top:0; width:844; height:563; z-index:0; }
+#bkgphotodark { position:absolute; left:0; top:0; width:844; height:563; z-index:1; visibility:hidden; }
+#previewarea { position:absolute; left:105; top:26; width:226; height:240; z-index:2; }
+#portrait { position:absolute; left:431; top:24; width:314; height:469; z-index:4; }
+#portraitmatte { position:absolute; left:429; top:22; width:318; height:473; z-index:3; visibility:hidden; }
+#landscape { position:absolute; left:258; top:285; width:408; height:273; z-index:4; }
+#landscapematte { position:absolute; left:256; top:283; width:412; height:277; z-index:3; visibility:hidden; }
+#navigation { position:absolute; left:21; top:63; width:48; height:285; z-index:5; }
+#branding { position:absolute; left:465; top:534; width:300; height:20; z-index:6; visibility:hidden; }
+a.myname, a:visited.myname, a:active.myname, a:hover.myname { font-family:Georgia; font-size:22px; font-weight:bold; color:#FFFFFF;  }
+-->
+</style>
+
+<!-- This is some standard code to use always -->
+<script src="pnhObjectLibrary/pnhBrowserCleanup.js" language="JavaScript" type="text/javascript"></script>
+
+<!-- These are the stangard library objects that this page will be leveraging -->
+<script src="pnhObjectLibrary/pnhExtendedImageObject.js" language="JavaScript" type="text/javascript"></script>
+<script src="pnhObjectLibrary/pnhLayerObject.js" language="JavaScript" type="text/javascript"></script>
+
+<!-- These are the custom objects that were created specifically for this project -->
+<!-- My object modeling is pretty lame... had I thought a bit more about it I'd have
+		a item object that knows about it's associated navigation item and photograph,
+		but rather then rebuild I kinda went with this route -->
+<script src="objects/pnhNavItemObject.js" language="JavaScript" type="text/javascript"></script>
+<script src="objects/pnhPhotoObject.js" language="JavaScript" type="text/javascript"></script>
+
+<!-- The rest of the javascript on this page is the code that puts it all together -->
+<script language="JavaScript" type="text/javascript">
+// Define Globals
+var aNavItems = new Array(20);
+var clearNavItem = null;
+
+function initPage() {
+
+	aNavItems[0] = new pnhNavItemObject("widget00","navigation",new pnhPhotoObject("00 : Nader on the day after","portrait","photos/nader.gif","photos/nader.jpg"));
+	aNavItems[1] = new pnhNavItemObject("widget01","navigation",new pnhPhotoObject("01 : Local delivery bikes","landscape","photos/bike-01.gif","photos/bike-01.jpg"));
+	aNavItems[2] = new pnhNavItemObject("widget02","navigation",new pnhPhotoObject("02 : Local delivery bikes","portrait","photos/bike-02.gif","photos/bike-02.jpg"));
+	aNavItems[3] = new pnhNavItemObject("widget03","navigation",new pnhPhotoObject("03 : NYC Street - West Side","portrait","photos/street.gif","photos/street.jpg"));
+	aNavItems[4] = new pnhNavItemObject("widget04","navigation",new pnhPhotoObject("04 : Missed the train","landscape","photos/train.gif","photos/train.jpg"));
+	aNavItems[5] = new pnhNavItemObject("widget05","navigation",new pnhPhotoObject("05 : Little Fuzzy Bunny","portrait","photos/bunny.gif","photos/bunny.jpg"));
+	aNavItems[6] = new pnhNavItemObject("widget06","navigation",new pnhPhotoObject("06 : Hands on a keyboard","landscape","photos/keyboard.gif","photos/keyboard.jpg"));
+	aNavItems[7] = new pnhNavItemObject("widget07","navigation",new pnhPhotoObject("07 : 8th Street birds","portrait","photos/pigeons.gif","photos/pigeons.jpg"));
+	aNavItems[8] = new pnhNavItemObject("widget08","navigation",new pnhPhotoObject("08 : Fun at Void","landscape","photos/void-01.gif","photos/void-01.jpg"));
+	aNavItems[9] = new pnhNavItemObject("widget09","navigation",new pnhPhotoObject("09 : More fun at Void","landscape","photos/void-02.gif","photos/void-02.jpg"));
+	aNavItems[10] = new pnhNavItemObject("widget10","navigation",new pnhPhotoObject("10 : Washington Sq. Park","portrait","photos/wsp-01.gif","photos/wsp-01.jpg"));
+	aNavItems[11] = new pnhNavItemObject("widget11","navigation",new pnhPhotoObject("11 : Washington Sq. Park Resident","landscape","photos/wsp-02.gif","photos/wsp-02.jpg"));
+	aNavItems[12] = new pnhNavItemObject("widget12","navigation",new pnhPhotoObject("12 : Washington Sq. Park Ladies","landscape","photos/wsp-03.gif","photos/wsp-03.jpg"));
+	aNavItems[13] = new pnhNavItemObject("widget13","navigation",new pnhPhotoObject("13 : Hoboken Balls","landscape","photos/balls.gif","photos/balls.jpg"));
+	aNavItems[14] = new pnhNavItemObject("widget14","navigation",new pnhPhotoObject("14 : Village Trombone Player","landscape","photos/kolker-01.gif","photos/kolker-01.jpg"));
+	aNavItems[15] = new pnhNavItemObject("widget15","navigation",new pnhPhotoObject("15 : 7Minds photo op","portrait","photos/7minds-02.gif","photos/7minds-02.jpg"));
+	aNavItems[16] = new pnhNavItemObject("widget16","navigation",new pnhPhotoObject("16 : Mid-NJ Plantlife","landscape","photos/prickers.gif","photos/prickers.jpg"));
+	aNavItems[17] = new pnhNavItemObject("widget17","navigation",new pnhPhotoObject("17 : NYC Skyline","portrait","photos/skyline.gif","photos/skyline.jpg"));
+	aNavItems[18] = new pnhNavItemObject("widget18","navigation",new pnhPhotoObject("18 : Senic Newark","landscape","photos/wall.gif","photos/wall.jpg"));
+	aNavItems[19] = new pnhNavItemObject("widget19","navigation",new pnhPhotoObject("19 : Village Crosswalk","portrait","photos/crosswalk.gif","photos/crosswalk.jpg"));
+
+	clearNavItem = new pnhNavItemObject("clearwidget","navigation",null,null);
+
+
+}
+
+
+
+</script>
+</head>
+
+<body bgcolor="#666666" onload="initPage(); pnhBrowserCleanup()">
+<!-- NOTE: I have decided not to lump the dynamic resizing in with this project, instead the calling page will be sending some info about the
+	window size & I'll work out the variables on the backend. It's really 6 of one/half dozen of the other because I'm mostly dealing with the initial
+	size of the window. I just felt the resize window case was a bunch to code for happening a little bit of the time. Doing this on the backend also
+	allows me to better track what range of window sizes I'm getting so I can plan better on future projects -->
+<div id="bkgphoto"><img name="bkg_img" src="photos/background.jpg" width="844" height="563" alt="" border="0"></div>
+<div id="bkgphotodark"><img name="bkg_img" src="photos/backgroundDark.jpg" width="844" height="563" alt="" border="0"></div>
+<div id="navigation">
+	<table border="0" cellpadding="0" cellspacing="0" width="48">
+		<tr>
+			<td><a href="#" onclick="clearNavItem.handleClick(); return false" onmouseover="clearNavItem.handleMouseOver();" onmouseout="clearNavItem.handleMouseOut();"><img name="clearwidget" src="basicimages/nav_clear_button.gif" width="18" height="18" alt="" border="0"></a></td>
+			<td rowspan="21"><img src="basicimages/spacer.gif" width="11" height="1" alt="" border="0"></td>
+			<td><img src="basicimages/spacer.gif" width="18" height="18" alt="" border="0"></td>
+		</tr>
+		<tr><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td></tr>
+		<tr>
+			<td><a href="#" onclick="aNavItems[1].handleClick(); return false" onmouseover="aNavItems[1].handleMouseOver();" onmouseout="aNavItems[1].handleMouseOut();"><img name="widget01" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+			<td><a href="#" onclick="aNavItems[2].handleClick(); return false" onmouseover="aNavItems[2].handleMouseOver();" onmouseout="aNavItems[2].handleMouseOut();"><img name="widget02" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+		</tr>
+		<tr><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td></tr>
+		<tr>
+			<td><a href="#" onclick="aNavItems[3].handleClick(); return false" onmouseover="aNavItems[3].handleMouseOver();" onmouseout="aNavItems[3].handleMouseOut();"><img name="widget03" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+			<td><a href="#" onclick="aNavItems[4].handleClick(); return false" onmouseover="aNavItems[4].handleMouseOver();" onmouseout="aNavItems[4].handleMouseOut();"><img name="widget04" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+		</tr>
+		<tr><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td></tr>
+		<tr>
+			<td><a href="#" onclick="aNavItems[5].handleClick(); return false" onmouseover="aNavItems[5].handleMouseOver();" onmouseout="aNavItems[5].handleMouseOut();"><img name="widget05" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+			<td><a href="#" onclick="aNavItems[6].handleClick(); return false" onmouseover="aNavItems[6].handleMouseOver();" onmouseout="aNavItems[6].handleMouseOut();"><img name="widget06" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+		</tr>
+		<tr><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td></tr>
+		<tr>
+			<td><a href="#" onclick="aNavItems[7].handleClick(); return false" onmouseover="aNavItems[7].handleMouseOver();" onmouseout="aNavItems[7].handleMouseOut();"><img name="widget07" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+			<td><a href="#" onclick="aNavItems[8].handleClick(); return false" onmouseover="aNavItems[8].handleMouseOver();" onmouseout="aNavItems[8].handleMouseOut();"><img name="widget08" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+		</tr>
+		<tr><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td></tr>
+		<tr>
+			<td><a href="#" onclick="aNavItems[9].handleClick(); return false" onmouseover="aNavItems[9].handleMouseOver();" onmouseout="aNavItems[9].handleMouseOut();"><img name="widget09" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+			<td><a href="#" onclick="aNavItems[10].handleClick(); return false" onmouseover="aNavItems[10].handleMouseOver();" onmouseout="aNavItems[10].handleMouseOut();"><img name="widget10" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+		</tr>
+		<tr><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td></tr>
+		<tr>
+			<td><a href="#" onclick="aNavItems[11].handleClick(); return false" onmouseover="aNavItems[11].handleMouseOver();" onmouseout="aNavItems[11].handleMouseOut();"><img name="widget11" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+			<td><a href="#" onclick="aNavItems[12].handleClick(); return false" onmouseover="aNavItems[12].handleMouseOver();" onmouseout="aNavItems[12].handleMouseOut();"><img name="widget12" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+		</tr>
+		<tr><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td></tr>
+		<tr>
+			<td><a href="#" onclick="aNavItems[0].handleClick(); return false" onmouseover="aNavItems[0].handleMouseOver();" onmouseout="aNavItems[0].handleMouseOut();"><img name="widget00" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+			<td><a href="#" onclick="aNavItems[13].handleClick(); return false" onmouseover="aNavItems[13].handleMouseOver();" onmouseout="aNavItems[13].handleMouseOut();"><img name="widget13" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+		</tr>
+		<tr><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td></tr>
+		<tr>
+			<td><a href="#" onclick="aNavItems[14].handleClick(); return false" onmouseover="aNavItems[14].handleMouseOver();" onmouseout="aNavItems[14].handleMouseOut();"><img name="widget14" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+			<td><a href="#" onclick="aNavItems[15].handleClick(); return false" onmouseover="aNavItems[15].handleMouseOver();" onmouseout="aNavItems[15].handleMouseOut();"><img name="widget15" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+		</tr>
+		<tr><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td></tr>
+		<tr>
+			<td><a href="#" onclick="aNavItems[16].handleClick(); return false" onmouseover="aNavItems[16].handleMouseOver();" onmouseout="aNavItems[16].handleMouseOut();"><img name="widget16" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+			<td><a href="#" onclick="aNavItems[17].handleClick(); return false" onmouseover="aNavItems[17].handleMouseOver();" onmouseout="aNavItems[17].handleMouseOut();"><img name="widget17" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+		</tr>
+		<tr><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td><td><img src="basicimages/spacer.gif" width="18" height="11" alt="" border="0"></td></tr>
+		<tr>
+			<td><a href="#" onclick="aNavItems[18].handleClick(); return false" onmouseover="aNavItems[18].handleMouseOver();" onmouseout="aNavItems[18].handleMouseOut();"><img name="widget18" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+			<td><a href="#" onclick="aNavItems[19].handleClick(); return false" onmouseover="aNavItems[19].handleMouseOver();" onmouseout="aNavItems[19].handleMouseOut();"><img name="widget19" src="basicimages/nav_button.gif" width="18" height="18" alt="" border="0"></a></td>
+		</tr>
+	</table>
+</div>
+<div id="previewarea"><img name="preview" src="basicimages/spacer.gif" width="226" height="240" alt="" border="0"></div>
+<div id="portrait"><img name="portrait_img" src="basicimages/spacer.gif" width="314" height="469" alt="" border="0"></div>
+<div id="portraitmatte"><img src="basicimages/portraitmatte.gif" width="318" height="473" alt="" border="0"></div>
+<div id="landscape"><img name="landscape_img" src="basicimages/spacer.gif" width="408" height="273" alt="" border="0"></div>
+<div id="landscapematte"><img src="basicimages/landscapematte.gif" width="412" height="277" alt="" border="0"></div>
+<div id="branding"><a href="#" class="myname">christophercascianophotography</a></div>
+</body>
+</html>
